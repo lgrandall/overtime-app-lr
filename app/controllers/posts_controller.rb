@@ -24,6 +24,7 @@ class PostsController < ApplicationController
 
 	private
 
+
 	  def post_params
 	  	params.require(:post).permit(:date, :rationale)
 	  end
@@ -31,4 +32,5 @@ class PostsController < ApplicationController
 	  def set_post
 	  	@post = Post.find(params[:id])
 	  end
+	
 end
