@@ -4,9 +4,9 @@
 
 ## Models
 
-- Post -> date:date rationale:text
-x User -> Devise
-x AdminUser -> STI
+- X Post -> date:date rationale:text
+- x User -> Devise
+- x AdminUser -> STI
 
 ## Features:
 
@@ -17,7 +17,7 @@ x AdminUser -> STI
 - Needs to be documented if employee did not log overtime
 
 ## UI:
--Bootstrap -> formatting
+- X Bootstrap -> formatting
 
 ## REFACTOR TODO'S
 - Refactor User Association integration test in post_spec
