@@ -10,11 +10,24 @@
 		<%= f.label "Date", class: "col-sm-2 control-label" %>
 		<%= f.date_field :date, class: "form-control" %>
 	</div>
+
 	<div class="form-group">
 		<%= f.label "Rationale", class: "col-sm-2 control-label" %>
 		<%= f.text_area :rationale, class: "form-control" %>
 	</div>
 	
+	<div class="form-group">
+	<p><%= f.radio_button :status, 'submitted' %>
+	<%= f.label :status, 'Submitted' %>
+	</p>
+
+	<p><%= f.radio_button :status, 'approved' %>
+	<%= f.label :status, 'Approved' %></p>
+
+	<p><%= f.radio_button :status, 'rejected' %>
+	<%= f.label :status, 'Rejected' %></p>
+	</div>
+
 	<%= f.submit 'Save', class: "btn btn-primary btn-block" %>
 <% end %>
 
