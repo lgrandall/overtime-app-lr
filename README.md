@@ -22,3 +22,4 @@
 
 ## REFACTOR TODO'S
 - Refactor User Association integration test in post_spec
+- Refactor post/_form for admin user with status
