@@ -25,6 +25,17 @@ describe 'navigate' do
       visit posts_path
       expect(page).to have_content(/Rationale|content/)
     end
+
+    it "has a scope so that the user can only see their posts" do
+      other_user = User.create(first_name: "other", last_name: "user", email: "other@test.com", password: "password", password_confirmation: "password")
+      post1 = FactoryGirl.build_stubbed(:post, user_id: @user.id)
+      post2 = FactoryGirl.build_stubbed(:second_post, user_id: @user.id)
+      post3 = Post.create(date: Date.today, rationale: "Other user's content", user_id: other_user.id)
+      
+      visit posts_path
+      expect(page).to_not have_content("Other user's content")
+
+    end
   end
 
   describe 'new' do
@@ -37,7 +48,7 @@ describe 'navigate' do
 
   describe 'delete' do
     it 'can be deleted' do
-      @post = FactoryGirl.create(:post)
+      @post = FactoryGirl.create(:post, user_id: @user.id)
       visit posts_path
 
       click_link("delete_post_#{@post.id}_from_index")
@@ -72,24 +83,32 @@ describe 'navigate' do
     end
   end
 
-  describe 'edit' do 
-
+    describe 'edit' do
     before do
-      @post = FactoryGirl.create(:post)
-    end
-    it "can be reached by clicking edit on index page" do
-      visit posts_path
-      click_link("edit_#{@post.id}")
-      expect(page.status_code).to eq(200)
+      @edit_user = User.create(first_name: "asdf", last_name: "asdf", email: "asdfasdf@asdf.com", password: "asdfasdf", password_confirmation: "asdfasdf")
+      login_as(@edit_user, :scope => :user)
+      @edit_post = Post.create(date: Date.today, rationale: "asdf", user_id: @edit_user.id)
     end
 
     it 'can be edited' do
-      visit edit_post_path(@post)
+      visit edit_post_path(@edit_post)
+
       fill_in 'post[date]', with: Date.today
-      fill_in 'post[rationale]', with: "Edited Content"
+      fill_in 'post[rationale]', with: "Edited content"
       click_on "Save"
 
-      expect(page).to have_content("Edited Content")
+      expect(page).to have_content("Edited content")
+    end
+
+    it 'cannot be edited by a non authorized user' do
+      logout(:user)
+      non_authorized_user = FactoryGirl.create(:non_authorized_user)
+      login_as(non_authorized_user, :scope => :user)
+
+      visit edit_post_path(@edit_post)
+
+      expect(current_path).to eq(root_path)
+
     end
   end
 end
