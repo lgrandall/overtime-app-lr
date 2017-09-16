@@ -30,7 +30,7 @@ describe 'navigate' do
 
     it "has a scope so that the user can only see their posts" do
       other_user = User.create(first_name: "other", last_name: "user", email: "other@test.com", password: "password", password_confirmation: "password")
-      post3 = Post.create(date: Date.today, rationale: "Other user's content", user_id: other_user.id), overtime_request: 3.5)
+      post3 = Post.create(date: Date.today, rationale: "Other user's content", user_id: other_user.id, overtime_request: 3.0)
       
       visit posts_path
       expect(page).to_not have_content("Other user's content")
@@ -69,14 +69,14 @@ describe 'navigate' do
     it 'can be created from new form page' do
       fill_in 'post[date]', with: Date.today
       fill_in 'post[rationale]', with: "Some rationale"
-      click_on "Save"
-
-      expect(page).to have_content("Some rationale")
+      fill_in 'post[overtime_request]', with: 1.5
+      expect {click_on "Save"}.to change(Post, :count).by(1)
     end
 
     it 'will have a user associated it' do
       fill_in 'post[date]', with: Date.today
       fill_in 'post[rationale]', with: "User Association"
+      fill_in 'post[overtime_request]', with: 1.5
       click_on "Save"
 
       expect(User.last.posts.last.rationale).to eq("User Association")
@@ -89,6 +89,7 @@ describe 'navigate' do
 
         fill_in 'post[date]', with: Date.today
         fill_in 'post[rationale]', with: "Edited content"
+        fill_in 'post[overtime_request]', with: 1.5
         click_on "Save"
 
         expect(page).to have_content("Edited content")
