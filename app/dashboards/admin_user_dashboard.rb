@@ -22,6 +22,7 @@ class AdminUserDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime.with_options(searchable: false),
     updated_at: Field::DateTime.with_options(searchable: false),
     type: Field::String.with_options(searchable: false),
+    phone: Field::String.with_options(searchable: false),
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -33,6 +34,7 @@ class AdminUserDashboard < Administrate::BaseDashboard
     :posts,
     :id,
     :email,
+    :phone,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -41,6 +43,7 @@ class AdminUserDashboard < Administrate::BaseDashboard
     :email,
     :first_name,
     :last_name,
+    :phone,
     :type,
     :created_at,
     :updated_at,
@@ -54,7 +57,7 @@ class AdminUserDashboard < Administrate::BaseDashboard
     :password,
     :first_name,
     :last_name,
-    :type,
+    :phone,
   ].freeze
 
   # Overwrite this method to customize how admin users are displayed
