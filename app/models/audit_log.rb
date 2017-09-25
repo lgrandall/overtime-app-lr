@@ -4,6 +4,7 @@ class AuditLog < ApplicationRecord
 
 	after_initialize :set_defaults
 
+
 	private
 
 		def set_defaults
