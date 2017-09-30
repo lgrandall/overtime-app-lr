@@ -38,6 +38,10 @@ class ApplicationPolicy
     Pundit.policy_scope!(user, record.class)
   end
 
+  def approve?
+    false
+  end
+
   def admin_types
     ['AdminUser']
   end
