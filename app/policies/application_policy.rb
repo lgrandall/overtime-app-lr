@@ -39,7 +39,7 @@ class ApplicationPolicy
   end
 
   def approve?
-    false
+    
   end
 
   def admin_types

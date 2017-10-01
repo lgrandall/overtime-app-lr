@@ -6,7 +6,7 @@ class PostsController < ApplicationController
 
 	def approve
 		authorize @post 
-		@post.approved!
+		@post.approve!
 		redirect_to root_path, notice: 'The post has been approved'
 	end
 
