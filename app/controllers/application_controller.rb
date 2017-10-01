@@ -12,4 +12,10 @@ class ApplicationController < ActionController::Base
     flash[:alert] = "You are not authorized to perform this action."
     redirect_to(root_path)
   end
+
+
+  helper_method :admin_types
+  def admin_types
+  	['AdminUser']
+  end
 end
