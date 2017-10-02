@@ -57,14 +57,14 @@ puts "100 post have been created"
 
 	AuditLog.create(
 		user_id: @user.id, 
-		status: 1, 
+		status: 0, 
 		start_date: (Date.today - 13.days), 
 		end_date: nil
 		)
 
 	AuditLog.create(
 		user_id: @user.id, 
-		status: 1, 
+		status: 0, 
 		start_date: (Date.today - 20.days), 
 		end_date: nil
 		)
