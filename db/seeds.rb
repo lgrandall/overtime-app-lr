@@ -14,6 +14,29 @@ puts "1 User created"
 						 type: "AdminUser",
 						 phone: "4153048935")
 
+	AuditLog.create!(
+		user_id: @user.id, 
+		status: 0, 
+		start_date: (Date.today - 6.days), 
+		end_date: nil
+		)
+
+	AuditLog.create(
+		user_id: @user.id, 
+		status: 0, 
+		start_date: (Date.today - 13.days), 
+		end_date: nil
+		)
+
+	AuditLog.create(
+		user_id: @user.id, 
+		status: 0, 
+		start_date: (Date.today - 20.days), 
+		end_date: nil
+		)
+
+puts '3 audit logs created'
+
 puts "1 Admin User created"
 
 70.times do |post|
@@ -48,27 +71,6 @@ end
 puts "100 post have been created"
 
 
-	AuditLog.create!(
-		user_id: @user.id, 
-		status: 0, 
-		start_date: (Date.today - 6.days), 
-		end_date: nil
-		)
 
-	AuditLog.create(
-		user_id: @user.id, 
-		status: 0, 
-		start_date: (Date.today - 13.days), 
-		end_date: nil
-		)
-
-	AuditLog.create(
-		user_id: @user.id, 
-		status: 0, 
-		start_date: (Date.today - 20.days), 
-		end_date: nil
-		)
-
-puts '3 audit logs created'
 
 
